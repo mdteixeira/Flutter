@@ -10,9 +10,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          useMaterial3: true,
-          primarySwatch: Colors.blue,
-          textTheme: GoogleFonts.poppinsTextTheme()),
+        useMaterial3: true,
+        primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.interTextTheme(),
+      ),
       home: const LoginPage(),
     );
   }
