@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_estudos/pages/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -85,9 +86,12 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.infinity,
                     child: TextButton(
                         onPressed: () {
-                          if (emailController.text.trim() ==
-                                  "email@email.com" &&
+                          if (emailController.text.trim() == "em" &&
                               passwordController.text.trim() == '123') {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MainPage()));
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content:
