@@ -38,7 +38,6 @@ class _MainPageState extends State<MainPage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const DadosCadastrais(
-                                    texto: 'Meus Dados',
                                   )));
                     },
                   ),
