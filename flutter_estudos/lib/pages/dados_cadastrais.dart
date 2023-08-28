@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_estudos/shared/widgets/text_label.dart';
 
 class DadosCadastrais extends StatefulWidget {
   const DadosCadastrais({
@@ -12,11 +13,7 @@ class DadosCadastrais extends StatefulWidget {
 class _DadosCadastraisState extends State<DadosCadastrais> {
   var nomeController = TextEditingController(text: "");
   var dataNascimentoController = TextEditingController(text: "");
-
-  Text returnText(String texto) {
-    return Text(texto,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700));
-  }
+  DateTime? dataNascimento;
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +26,14 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            returnText('Nome'),
+            const TextLabel(texto: 'Nome'),
             TextField(
               controller: nomeController,
             ),
-            const Text('Data de nascimento'),
+            const SizedBox(
+              height: 25,
+            ),
+            const TextLabel(texto: 'Data de nascimento'),
             TextField(
               controller: dataNascimentoController,
               readOnly: true,
@@ -45,6 +45,7 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                     lastDate: DateTime(2024, 1, 1));
                 if (data != null) {
                   dataNascimentoController.text = data.toString();
+                  dataNascimento = data;
                 }
               },
             ),
