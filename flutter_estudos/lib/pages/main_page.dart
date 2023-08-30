@@ -3,6 +3,7 @@ import 'package:flutter_estudos/pages/dados_cadastrais.dart';
 import 'package:flutter_estudos/pages/pagina1.dart';
 import 'package:flutter_estudos/pages/pagina2.dart';
 import 'package:flutter_estudos/pages/pagina3.dart';
+import 'package:flutter_estudos/shared/widgets/custom_drawer.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -19,50 +20,7 @@ class _MainPageState extends State<MainPage> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(title: const Text("Main page")),
-          drawer: Drawer(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Divider(),
-                  InkWell(
-                    child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                        width: double.infinity,
-                        child: const Text('Dados Cadastrais')),
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const DadosCadastrais(
-                                  )));
-                    },
-                  ),
-                  const Divider(),
-                  InkWell(
-                    child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                        width: double.infinity,
-                        child: const Text('Termos de uso e privacidade')),
-                    onTap: () {},
-                  ),
-                  const Divider(),
-                  InkWell(
-                    child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                        width: double.infinity,
-                        child: const Text('Configurações')),
-                    onTap: () {},
-                  ),
-                ],
-              ),
-            ),
-          ),
+          drawer: const CustomDrawer(),
           body: Column(
             children: [
               Expanded(
