@@ -185,14 +185,6 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                           return;
                         }
 
-                        print(nomeController.text);
-                        print(dataNascimento);
-                        print(nivelSelecionado);
-                        print(linguagensSelecionadas);
-                        print(tempoExperiencia);
-                        print(salarioSelecionado);
-                        print('Dados salvos.');
-
                         setState(() {
                           salvando = true;
                         });
