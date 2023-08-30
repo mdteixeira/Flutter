@@ -27,6 +27,18 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
 
   double salarioSelecionado = 0;
 
+  int tempoExperiencia = 1;
+  List<DropdownMenuItem<int>> returnItems(int maxQnt) {
+    var itens = <DropdownMenuItem<int>>[];
+    for (var i = 0; i < maxQnt; i++) {
+      itens.add(DropdownMenuItem(
+        value: i,
+        child: Text('$i'),
+      ));
+    }
+    return itens;
+  }
+
   @override
   void initState() {
     niveis = nivelRepository.retornaNiveis();
@@ -100,6 +112,16 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                   )
                   .toList(),
             ),
+            const TextLabel(texto: 'Tempo de experiência'),
+            DropdownButton(
+                value: tempoExperiencia,
+                isExpanded: true,
+                items: returnItems(10),
+                onChanged: (value) {
+                  setState(() {
+                    tempoExperiencia = int.parse(value.toString());
+                  });
+                }),
             TextLabel(
                 texto:
                     "Pretenção salarial: R\$ ${salarioSelecionado.round().toString()}"),
@@ -108,7 +130,6 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                 max: 10000,
                 value: salarioSelecionado,
                 onChanged: (double value) {
-                  print(value);
                   setState(() {
                     salarioSelecionado = value;
                   });
@@ -116,6 +137,11 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
             TextButton(
                 onPressed: () {
                   print(nomeController.text);
+                  print(dataNascimento);
+                  print(nivelSelecionado);
+                  print(linguagensSelecionadas);
+                  print(tempoExperiencia);
+                  print(salarioSelecionado);
                 },
                 child: const Text('Salvar')),
           ],
