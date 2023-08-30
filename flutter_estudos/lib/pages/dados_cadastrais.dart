@@ -25,6 +25,8 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
   var linguagens = [];
   var linguagensSelecionadas = [];
 
+  double salarioSelecionado = 0;
+
   @override
   void initState() {
     niveis = nivelRepository.retornaNiveis();
@@ -98,7 +100,19 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                   )
                   .toList(),
             ),
-            
+            TextLabel(
+                texto:
+                    "Pretenção salarial: R\$ ${salarioSelecionado.round().toString()}"),
+            Slider(
+                min: 0,
+                max: 10000,
+                value: salarioSelecionado,
+                onChanged: (double value) {
+                  print(value);
+                  setState(() {
+                    salarioSelecionado = value;
+                  });
+                }),
             TextButton(
                 onPressed: () {
                   print(nomeController.text);
