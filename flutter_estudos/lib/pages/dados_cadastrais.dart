@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_estudos/repositories/linguagens_repository.dart';
 import 'package:flutter_estudos/repositories/nivel_repository.dart';
 import 'package:flutter_estudos/shared/widgets/text_label.dart';
 
@@ -18,11 +19,16 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
 
   var nivelRepository = NivelRepository();
   var niveis = [];
-  var nivel_selecionado = "";
+  var nivelSelecionado = "";
+
+  var linguagensRepository = LinguagensRepository();
+  var linguagens = [];
+  var linguagensSelecionadas = [];
 
   @override
   void initState() {
     niveis = nivelRepository.retornaNiveis();
+    linguagens = linguagensRepository.retornaLinguagens();
     super.initState();
   }
 
@@ -34,8 +40,7 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             const TextLabel(texto: 'Nome'),
             TextField(
@@ -61,16 +66,39 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
             Column(
                 children: niveis
                     .map((nivel) => RadioListTile(
-                        selected: nivel_selecionado == nivel,
+                        selected: nivelSelecionado == nivel,
                         title: Text(nivel.toString()),
                         value: nivel.toString(),
-                        groupValue: nivel_selecionado,
+                        groupValue: nivelSelecionado,
                         onChanged: (value) {
                           setState(() {
-                            nivel_selecionado = value.toString();
+                            nivelSelecionado = value.toString();
                           });
                         }))
                     .toList()),
+            const TextLabel(texto: 'Linguagens preferidas'),
+            Column(
+              children: linguagens
+                  .map(
+                    (linguagem) => CheckboxListTile(
+                        dense: true,
+                        title: Text(linguagem),
+                        value: linguagensSelecionadas.contains(linguagem),
+                        onChanged: (bool? value) {
+                          if (value!) {
+                            setState(() {
+                              linguagensSelecionadas.add(linguagem);
+                            });
+                          } else {
+                            setState(() {
+                              linguagensSelecionadas.remove(linguagem);
+                            });
+                          }
+                        }),
+                  )
+                  .toList(),
+            ),
+            
             TextButton(
                 onPressed: () {
                   print(nomeController.text);
