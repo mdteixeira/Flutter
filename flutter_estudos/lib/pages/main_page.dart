@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_estudos/pages/pagina1.dart';
+import 'package:flutter_estudos/pages/cards_page.dart';
 import 'package:flutter_estudos/pages/pagina2.dart';
 import 'package:flutter_estudos/pages/pagina3.dart';
 import 'package:flutter_estudos/shared/widgets/custom_drawer.dart';
@@ -31,7 +31,7 @@ class _MainPageState extends State<MainPage> {
                       });
                     },
                     children: const [
-                      Pagina1(),
+                      CardsPage(),
                       Pagina2(),
                       Pagina3(),
                     ]),
