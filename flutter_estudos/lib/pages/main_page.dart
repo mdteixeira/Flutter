@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_estudos/pages/cards_page.dart';
-import 'package:flutter_estudos/pages/pagina2.dart';
-import 'package:flutter_estudos/pages/pagina3.dart';
+import 'package:flutter_estudos/pages/image_assets.dart';
+import 'package:flutter_estudos/pages/list_view_h.dart';
+import 'package:flutter_estudos/pages/list_view_v.dart';
+import 'package:flutter_estudos/pages/tarefa_page.dart';
 import 'package:flutter_estudos/shared/widgets/custom_drawer.dart';
 
 class MainPage extends StatefulWidget {
@@ -32,11 +34,14 @@ class _MainPageState extends State<MainPage> {
                     },
                     children: const [
                       CardsPage(),
-                      Pagina2(),
-                      Pagina3(),
+                      ImageAssetsPage(),
+                      ListViewVertical(),
+                      ListViewHorizontal(),
+                      TarefaPage()
                     ]),
               ),
               BottomNavigationBar(
+                  type: BottomNavigationBarType.fixed,
                   onTap: (value) {
                     controller.jumpToPage(value);
                   },
@@ -45,9 +50,13 @@ class _MainPageState extends State<MainPage> {
                     BottomNavigationBarItem(
                         label: 'Início', icon: Icon(Icons.home)),
                     BottomNavigationBarItem(
-                        label: 'Pesquisar', icon: Icon(Icons.search)),
+                        label: 'Assets', icon: Icon(Icons.photo_library)),
                     BottomNavigationBarItem(
-                        label: 'Ajustes', icon: Icon(Icons.settings)),
+                        label: 'Vertical', icon: Icon(Icons.view_list)),
+                    BottomNavigationBarItem(
+                        label: 'Horizontal', icon: Icon(Icons.view_column)),
+                    BottomNavigationBarItem(
+                        label: 'Tarefas', icon: Icon(Icons.check)),
                   ])
             ],
           )),

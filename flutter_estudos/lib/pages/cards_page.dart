@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_estudos/model/card_detail.dart';
+import 'package:flutter_estudos/pages/card_detail.dart';
+import 'package:flutter_estudos/repositories/card_detail_repository.dart';
 
 class CardsPage extends StatefulWidget {
   const CardsPage({super.key});
@@ -8,6 +11,19 @@ class CardsPage extends StatefulWidget {
 }
 
 class _CardsPageState extends State<CardsPage> {
+  CardDetail? cardDetail;
+  var cardDetailRepository = CardDetailRepository();
+  @override
+  void initState() {
+    super.initState();
+    carregarDados();
+  }
+
+  void carregarDados() async {
+    cardDetail = await cardDetailRepository.get();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,42 +32,54 @@ class _CardsPageState extends State<CardsPage> {
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
             width: double.infinity,
-            child: Card(
-              elevation: 1,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+            child: cardDetail == null
+                ? const LinearProgressIndicator()
+                : Card(
+                    elevation: 1,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Torta de Camarão",
-                          style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.blueAccent),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                cardDetail!.title,
+                                style: const TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.blueAccent),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Image.network(
+                                cardDetail!.url,
+                                width: double.infinity,
+                              ),
+                              Text(cardDetail!.text),
+                            ],
+                          ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Image.network(
-                          'https://i.ytimg.com/vi/1byHBcHVTek/maxresdefault.jpg',
-                          width: double.infinity,
+                        Row(
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => CardDetailPage(
+                                                cardDetail: cardDetail!,
+                                              )));
+                                },
+                                child: const Text('Fazer Receita')),
+                            TextButton(
+                                onPressed: () {}, child: const Text('Favorito'))
+                          ],
                         ),
                       ],
                     ),
                   ),
-                  Row(
-                    children: [
-                      TextButton(
-                          onPressed: () {}, child: const Text('Fazer Receita')),
-                      TextButton(onPressed: () {}, child: const Text('Favorito'))
-                    ],
-                  ),
-                ],
-              ),
-            ),
           ),
         ),
       ],

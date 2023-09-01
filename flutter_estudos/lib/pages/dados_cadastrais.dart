@@ -188,7 +188,7 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                         setState(() {
                           salvando = true;
                         });
-                        Future.delayed(const Duration(seconds: 1), () {
+                        Future.delayed(const Duration(milliseconds: 10), () {
                           setState(() {
                             salvando = false;
                             ScaffoldMessenger.of(context).showSnackBar(
