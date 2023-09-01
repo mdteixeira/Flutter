@@ -17,14 +17,38 @@ class _CardsPageState extends State<CardsPage> {
           child: SizedBox(
             width: double.infinity,
             child: Card(
-              elevation: 4,
+              elevation: 1,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Torta de Camarão"),
-                  Image.network(
-                    'https://assets.unileversolutions.com/recipes-v2/35828.jpg',
-                    width: 200,
-                  )
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        const Text(
+                          "Torta de Camarão",
+                          style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.blueAccent),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Image.network(
+                          'https://i.ytimg.com/vi/1byHBcHVTek/maxresdefault.jpg',
+                          width: double.infinity,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      TextButton(
+                          onPressed: () {}, child: const Text('Fazer Receita')),
+                      TextButton(onPressed: () {}, child: const Text('Favorito'))
+                    ],
+                  ),
                 ],
               ),
             ),
