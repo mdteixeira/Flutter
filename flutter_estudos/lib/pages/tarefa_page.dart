@@ -96,20 +96,20 @@ class _TarefaPageState extends State<TarefaPage> {
                     var tarefa = _tarefas[index];
                     return Dismissible(
                       onDismissed: (DismissDirection dismissDirection) async {
-                        await tarefaRepository.remove(tarefa.getId());
+                        await tarefaRepository.remove(tarefa.id);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
-                                "A tarefa ${tarefa.getDescricao()} foi deletada.")));
+                                "A tarefa ${tarefa.descricao} foi deletada.")));
                         obterTarefas();
                       },
-                      key: Key(tarefa.getId()),
+                      key: Key(tarefa.id),
                       child: ListTile(
-                        title: Text(tarefa.getDescricao()),
+                        title: Text(tarefa.descricao),
                         trailing: Switch(
-                            value: tarefa.getConcluido(),
+                            value: tarefa.concluido,
                             onChanged: (bool value) async {
                               await tarefaRepository.alterar(
-                                  tarefa.getId(), value);
+                                  tarefa.id, value);
                               obterTarefas();
                             }),
                       ),

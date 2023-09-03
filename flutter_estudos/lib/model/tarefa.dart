@@ -7,23 +7,15 @@ class Tarefa {
 
   Tarefa(this._descricao, this._concluido);
 
-  String getId() {
-    return _id;
-  }
+  String get id => _id;
+  bool get concluido => _concluido;
+  String get descricao => _descricao;
 
-  String getDescricao() {
-    return _descricao;
-  }
-
-  bool getConcluido() {
-    return _concluido;
-  }
-
-  void setDescricao(String descricao) {
+  void set descricao(String descricao) {
     _descricao = descricao;
   }
-
-  void setConcluido(bool concluido) {
+  
+  void set concluido(bool concluido) {
     _concluido = concluido;
   }
 }
