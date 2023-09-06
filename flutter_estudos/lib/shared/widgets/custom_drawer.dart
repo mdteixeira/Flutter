@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_estudos/pages/dados_cadastrais.dart';
 import 'package:flutter_estudos/pages/login_page.dart';
+import 'package:flutter_estudos/pages/numeros_aleatorios_page.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -109,6 +110,32 @@ class CustomDrawer extends StatelessWidget {
                 width: double.infinity,
                 child: const Row(
                   children: [
+                    Icon(Icons.numbers),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Gerador de números',
+                    ),
+                  ],
+                )),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext bc) =>
+                          const NumerosAleatoriosPage()));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                width: double.infinity,
+                child: const Row(
+                  children: [
                     Icon(Icons.settings),
                     SizedBox(
                       width: 10,
@@ -129,7 +156,6 @@ class CustomDrawer extends StatelessWidget {
                         builder: (BuildContext bc) {
                           return AlertDialog(
                             icon: const Icon(Icons.logout),
-                            
                             actionsAlignment: MainAxisAlignment.center,
                             title: const Text(
                               'Você deseja sair?',
