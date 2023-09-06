@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_estudos/pages/configuracoes_page.dart';
 import 'package:flutter_estudos/pages/dados_cadastrais.dart';
 import 'package:flutter_estudos/pages/login_page.dart';
 import 'package:flutter_estudos/pages/numeros_aleatorios_page.dart';
@@ -145,7 +146,13 @@ class CustomDrawer extends StatelessWidget {
                     ),
                   ],
                 )),
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext bc) => const ConfiguracoesPage()));
+            },
           ),
           Expanded(child: Container()),
           Center(

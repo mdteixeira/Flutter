@@ -18,9 +18,9 @@ class _Pagina1State extends State<ListViewVertical> {
             onSelected: (menu) {},
             itemBuilder: (BuildContext context) {
               return <PopupMenuEntry<String>>[
-                PopupMenuItem(value: 'opcao1', child: Text("Opção 1")),
-                PopupMenuItem(value: 'opcao2', child: Text("Opção 2")),
-                PopupMenuItem(value: 'opcao3', child: Text("Opção 3")),
+                const PopupMenuItem(value: 'opcao1', child: Text("Opção 1")),
+                const PopupMenuItem(value: 'opcao2', child: Text("Opção 2")),
+                const PopupMenuItem(value: 'opcao3', child: Text("Opção 3")),
               ];
             },
           ),

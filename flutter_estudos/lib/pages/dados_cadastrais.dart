@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_estudos/repositories/linguagens_repository.dart';
 import 'package:flutter_estudos/repositories/nivel_repository.dart';
 import 'package:flutter_estudos/shared/widgets/text_label.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DadosCadastrais extends StatefulWidget {
   const DadosCadastrais({
@@ -23,11 +24,20 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
 
   var linguagensRepository = LinguagensRepository();
   var linguagens = [];
-  var linguagensSelecionadas = [];
+  List<String> linguagensSelecionadas = [];
 
   double salarioSelecionado = 0;
 
   bool salvando = false;
+
+  late SharedPreferences storage;
+
+  final CHAVE_NOME = 'nome';
+  final CHAVE_DATA_NASCIMENTO = 'data_nascimento';
+  final CHAVE_TEMPO_EXPERIENCIA = 'tempo_xp';
+  final CHAVE_LINGUAGENS = 'linguagens_favoritas';
+  final CHAVE_NIVEL_EXPERIENCIA = 'nivel_xp';
+  final CHAVE_PRETENCAO_SALARIAL = 'pretencao_salarial';
 
   int tempoExperiencia = 0;
   List<DropdownMenuItem<int>> returnItems(int maxQnt) {
@@ -46,6 +56,19 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
     niveis = nivelRepository.retornaNiveis();
     linguagens = linguagensRepository.retornaLinguagens();
     super.initState();
+    CarregarDados();
+  }
+
+  CarregarDados() async {
+    storage = await SharedPreferences.getInstance();
+    nomeController.text = storage.getString(CHAVE_NOME) ?? '';
+    dataNascimentoController.text =
+        storage.getString(CHAVE_DATA_NASCIMENTO) ?? '';
+    nivelSelecionado = storage.getString(CHAVE_NIVEL_EXPERIENCIA) ?? '';
+    linguagensSelecionadas = storage.getStringList(CHAVE_LINGUAGENS) ?? [];
+    tempoExperiencia = storage.getInt(CHAVE_TEMPO_EXPERIENCIA) ?? 0;
+    salarioSelecionado = storage.getDouble(CHAVE_PRETENCAO_SALARIAL) ?? 0;
+    setState(() {});
   }
 
   @override
@@ -139,7 +162,7 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                         });
                       }),
                   TextButton(
-                      onPressed: () {
+                      onPressed: () async {
                         setState(() {
                           salvando = false;
                         });
@@ -184,6 +207,21 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                                   'A pretenção salarial deve ser maior que 0.')));
                           return;
                         }
+
+                        await storage.setString(
+                            CHAVE_NOME, nomeController.text);
+                        await storage.setStringList(
+                            CHAVE_LINGUAGENS, linguagensSelecionadas);
+                        await storage.setString(
+                            CHAVE_NIVEL_EXPERIENCIA, nivelSelecionado);
+                        await storage.setString(CHAVE_TEMPO_EXPERIENCIA,
+                            tempoExperiencia.toString());
+                        await storage.setString(CHAVE_DATA_NASCIMENTO,
+                            dataNascimentoController.text);
+                        await storage.setInt(
+                            CHAVE_TEMPO_EXPERIENCIA, tempoExperiencia);
+                        await storage.setDouble(
+                            CHAVE_PRETENCAO_SALARIAL, salarioSelecionado);
 
                         setState(() {
                           salvando = true;

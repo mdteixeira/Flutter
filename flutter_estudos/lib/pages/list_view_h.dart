@@ -21,7 +21,7 @@ class ListViewHorizontal extends StatelessWidget {
                         AppImages.user1,
                         height: 100,
                       ),
-                      Text('User 1')
+                      const Text('User 1')
                     ],
                   ),
                 ),
@@ -33,7 +33,7 @@ class ListViewHorizontal extends StatelessWidget {
                         AppImages.user2,
                         height: 100,
                       ),
-                      Text('User 2')
+                      const Text('User 2')
                     ],
                   ),
                 ),
@@ -45,7 +45,7 @@ class ListViewHorizontal extends StatelessWidget {
                         AppImages.user3,
                         height: 100,
                       ),
-                      Text('User 3')
+                      const Text('User 3')
                     ],
                   ),
                 ),

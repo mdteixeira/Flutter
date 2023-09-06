@@ -11,11 +11,11 @@ class Tarefa {
   bool get concluido => _concluido;
   String get descricao => _descricao;
 
-  void set descricao(String descricao) {
+  set descricao(String descricao) {
     _descricao = descricao;
   }
   
-  void set concluido(bool concluido) {
+  set concluido(bool concluido) {
     _concluido = concluido;
   }
 }
