@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_estudos/pages/configuracoes_page.dart';
+import 'package:flutter_estudos/pages/configuracoes/configuracoes_hive_page.dart';
+import 'package:flutter_estudos/pages/configuracoes/configuracoes_sp_page.dart';
 import 'package:flutter_estudos/pages/dados_cadastrais.dart';
 import 'package:flutter_estudos/pages/login_page.dart';
 import 'package:flutter_estudos/pages/numeros_aleatorios/numeros_aleatorios_hive_page.dart';
@@ -152,7 +153,8 @@ class CustomDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext bc) => const ConfiguracoesPage()));
+                      builder: (BuildContext bc) =>
+                          const ConfiguracoesHivePage()));
             },
           ),
           Expanded(child: Container()),

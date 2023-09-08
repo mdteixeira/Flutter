@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ConfiguracoesPage extends StatefulWidget {
-  const ConfiguracoesPage({super.key});
+class ConfiguracoesSpPage extends StatefulWidget {
+  const ConfiguracoesSpPage({super.key});
 
   @override
-  State<ConfiguracoesPage> createState() => _ConfiguracoesPageState();
+  State<ConfiguracoesSpPage> createState() => _ConfiguracoesSpPageState();
 }
 
-class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
+class _ConfiguracoesSpPageState extends State<ConfiguracoesSpPage> {
   late SharedPreferences storage;
 
   bool receberPushNotification = false;
