@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_estudos/pages/configuracoes_page.dart';
 import 'package:flutter_estudos/pages/dados_cadastrais.dart';
 import 'package:flutter_estudos/pages/login_page.dart';
-import 'package:flutter_estudos/pages/numeros_aleatorios_page.dart';
+import 'package:flutter_estudos/pages/numeros_aleatorios/numeros_aleatorios_hive_page.dart';
+import 'package:flutter_estudos/pages/numeros_aleatorios/numeros_aleatorios_sp_page.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -126,7 +127,7 @@ class CustomDrawer extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (BuildContext bc) =>
-                          const NumerosAleatoriosPage()));
+                          const NumerosAleatoriosHivePage()));
             },
           ),
           const Divider(),
