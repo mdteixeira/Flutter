@@ -15,7 +15,7 @@ class DadosCadastraisRepository {
     return DadosCadastraisRepository._criar();
   }
 
-  salvar(DadosCadastraisModel dadosCadastraisModel) {
+  void salvar(DadosCadastraisModel dadosCadastraisModel) {
     _box.put('dadosCadastraisModel', dadosCadastraisModel);
   }
 
