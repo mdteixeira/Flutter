@@ -4,6 +4,7 @@ import 'package:flutter_estudos/pages/image_assets.dart';
 import 'package:flutter_estudos/pages/list_view_h.dart';
 import 'package:flutter_estudos/pages/list_view_v.dart';
 import 'package:flutter_estudos/pages/tarefa_page.dart';
+import 'package:flutter_estudos/pages/tarefa_page_sql.dart';
 import 'package:flutter_estudos/shared/widgets/custom_drawer.dart';
 
 class MainPage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _MainPageState extends State<MainPage> {
                       ImageAssetsPage(),
                       ListViewVertical(),
                       ListViewHorizontal(),
-                      TarefaPage()
+                      TarefaPageSQL()
                     ]),
               ),
               BottomNavigationBar(
