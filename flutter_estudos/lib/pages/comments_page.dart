@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_estudos/model/comment_model.dart';
-import 'package:flutter_estudos/repositories/comments_repo.dart';
+import 'package:flutter_estudos/repositories/commentsHttp_repo.dart';
 
 class CommentsPage extends StatefulWidget {
   final int postID;
@@ -11,7 +11,7 @@ class CommentsPage extends StatefulWidget {
 }
 
 class CommentsPageState extends State<CommentsPage> {
-  var commentsRepository = CommentsRepository();
+  var commentsRepository = CommentsRepositoryHttp();
   var comments = <CommentsModel>[];
   var loading = false;
 

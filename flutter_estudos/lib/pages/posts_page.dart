@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_estudos/model/post_model.dart';
 import 'package:flutter_estudos/pages/comments_page.dart';
-import 'package:flutter_estudos/repositories/post_repo.dart';
+import 'package:flutter_estudos/repositories/posts/impl/postHttp_repo.dart';
+import 'package:flutter_estudos/repositories/posts/impl/posts_dio_repo.dart';
+import 'package:flutter_estudos/repositories/posts/posts_repository.dart';
 
 class PostsPage extends StatefulWidget {
   const PostsPage({super.key});
@@ -11,7 +13,7 @@ class PostsPage extends StatefulWidget {
 }
 
 class _PostsPageState extends State<PostsPage> {
-  var postsrepository = PostsRepository();
+  late PostsRepository postsRepository;
 
   var posts = <PostModel>[];
 
@@ -20,6 +22,7 @@ class _PostsPageState extends State<PostsPage> {
   @override
   void initState() {
     super.initState();
+    postsRepository = PostsDioRepository();
     carregarDados();
   }
 
@@ -27,7 +30,7 @@ class _PostsPageState extends State<PostsPage> {
     setState(() {
       loading = true;
     });
-    posts = await postsrepository.getPosts();
+    posts = await postsRepository.getPosts();
     setState(() {
       loading = false;
     });
