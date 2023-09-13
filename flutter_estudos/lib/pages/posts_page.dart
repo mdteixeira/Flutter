@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_estudos/model/post_model.dart';
 import 'package:flutter_estudos/pages/comments_page.dart';
-import 'package:flutter_estudos/repositories/posts/impl/postHttp_repo.dart';
 import 'package:flutter_estudos/repositories/posts/impl/posts_dio_repo.dart';
 import 'package:flutter_estudos/repositories/posts/posts_repository.dart';
 

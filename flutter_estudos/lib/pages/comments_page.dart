@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_estudos/model/comment_model.dart';
-import 'package:flutter_estudos/repositories/commentsHttp_repo.dart';
+import 'package:flutter_estudos/repositories/comments/commentsDio_repo.dart';
+import 'package:flutter_estudos/repositories/comments/comments_repository.dart';
 
 class CommentsPage extends StatefulWidget {
   final int postID;
@@ -11,13 +12,14 @@ class CommentsPage extends StatefulWidget {
 }
 
 class CommentsPageState extends State<CommentsPage> {
-  var commentsRepository = CommentsRepositoryHttp();
+  late CommentsRepository commentsRepository;
   var comments = <CommentsModel>[];
   var loading = false;
 
   @override
   void initState() {
     super.initState();
+    commentsRepository = CommentsRepositoryDio();
     carregarDados();
   }
 

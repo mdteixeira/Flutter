@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_estudos/model/viacep_model.dart';
 import 'package:flutter_estudos/repositories/via_cep_repo.dart';
-import 'package:http/http.dart' as http;
 
 class ConsultaCEP extends StatefulWidget {
   const ConsultaCEP({super.key});
