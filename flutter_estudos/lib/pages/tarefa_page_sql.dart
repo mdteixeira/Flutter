@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_estudos/model/tarefa.dart';
 import 'package:flutter_estudos/model/tarefa_model_sqlite.dart';
 import 'package:flutter_estudos/repositories/sqlite/tarefa_sqlite_repo.dart';
 import 'package:flutter_estudos/repositories/tarefa_repository.dart';
-
 class TarefaPageSQL extends StatefulWidget {
   const TarefaPageSQL({super.key});
 

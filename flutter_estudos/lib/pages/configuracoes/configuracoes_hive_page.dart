@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_estudos/model/configs_model.dart';
 import 'package:flutter_estudos/repositories/configs_repo.dart';
-import 'package:hive/hive.dart';
 
 class ConfiguracoesHivePage extends StatefulWidget {
   const ConfiguracoesHivePage({super.key});
@@ -19,11 +18,11 @@ class _ConfiguracoesHivePageState extends State<ConfiguracoesHivePage> {
 
   @override
   void initState() {
-    CarregarDados();
+    carregarDados();
     super.initState();
   }
 
-  CarregarDados() async {
+  carregarDados() async {
     configuracoesRepository = await ConfiguracoesRepository.carregar();
     configuracoesModel = configuracoesRepository.obterDados();
 

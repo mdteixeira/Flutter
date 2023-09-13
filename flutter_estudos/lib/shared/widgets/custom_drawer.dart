@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_estudos/pages/configuracoes/configuracoes_hive_page.dart';
-import 'package:flutter_estudos/pages/configuracoes/configuracoes_sp_page.dart';
 import 'package:flutter_estudos/pages/dados_cadastrais/dados_cadastrais.dart';
-import 'package:flutter_estudos/pages/dados_cadastrais/dados_cadastrais_hive.dart';
 import 'package:flutter_estudos/pages/login_page.dart';
 import 'package:flutter_estudos/pages/numeros_aleatorios/numeros_aleatorios_hive_page.dart';
-import 'package:flutter_estudos/pages/numeros_aleatorios/numeros_aleatorios_sp_page.dart';
+import 'package:flutter_estudos/pages/posts_page.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -156,6 +154,31 @@ class CustomDrawer extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (BuildContext bc) =>
                           const ConfiguracoesHivePage()));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                width: double.infinity,
+                child: const Row(
+                  children: [
+                    Icon(Icons.list),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Posts',
+                    ),
+                  ],
+                )),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext bc) => const PostsPage()));
             },
           ),
           Expanded(child: Container()),

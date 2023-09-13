@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_estudos/pages/cards_page.dart';
-import 'package:flutter_estudos/pages/image_assets.dart';
 import 'package:flutter_estudos/pages/list_view_h.dart';
 import 'package:flutter_estudos/pages/list_view_v.dart';
-import 'package:flutter_estudos/pages/tarefa_page.dart';
 import 'package:flutter_estudos/pages/tarefa_page_sql.dart';
+import 'package:flutter_estudos/pages/consultaCEP.dart';
 import 'package:flutter_estudos/shared/widgets/custom_drawer.dart';
 
 class MainPage extends StatefulWidget {
@@ -35,7 +34,7 @@ class _MainPageState extends State<MainPage> {
                     },
                     children: const [
                       CardsPage(),
-                      ImageAssetsPage(),
+                      ConsultaCEP(),
                       ListViewVertical(),
                       ListViewHorizontal(),
                       TarefaPageSQL()
@@ -51,7 +50,7 @@ class _MainPageState extends State<MainPage> {
                     BottomNavigationBarItem(
                         label: 'Início', icon: Icon(Icons.home)),
                     BottomNavigationBarItem(
-                        label: 'Assets', icon: Icon(Icons.photo_library)),
+                        label: 'HTTP', icon: Icon(Icons.http)),
                     BottomNavigationBarItem(
                         label: 'Vertical', icon: Icon(Icons.view_list)),
                     BottomNavigationBarItem(
