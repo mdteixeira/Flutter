@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_estudos/pages/Characters/characters_page.dart';
 import 'package:flutter_estudos/pages/configuracoes/configuracoes_hive_page.dart';
 import 'package:flutter_estudos/pages/dados_cadastrais/dados_cadastrais.dart';
 import 'package:flutter_estudos/pages/login_page.dart';
 import 'package:flutter_estudos/pages/numeros_aleatorios/numeros_aleatorios_hive_page.dart';
 import 'package:flutter_estudos/pages/posts_page.dart';
+import 'package:flutter_estudos/repositories/marvel_repository.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -179,6 +181,31 @@ class CustomDrawer extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (BuildContext bc) => const PostsPage()));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                width: double.infinity,
+                child: const Row(
+                  children: [
+                    Icon(Icons.person_4),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Heróis',
+                    ),
+                  ],
+                )),
+            onTap: () async {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext bc) => const CharactersPage()));
             },
           ),
           Expanded(child: Container()),
