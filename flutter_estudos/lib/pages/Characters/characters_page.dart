@@ -12,6 +12,9 @@ class CharactersPage extends StatefulWidget {
 class _CharactersPageState extends State<CharactersPage> {
   late MarvelRepository marvelRepository;
   CharactersModel characters = CharactersModel();
+  int offset = 0;
+
+  var loading = false;
 
   @override
   void initState() {
@@ -22,8 +25,36 @@ class _CharactersPageState extends State<CharactersPage> {
   }
 
   carregarDados() async {
-    characters = await marvelRepository.getCharacters();
+    if (characters.data == null || characters.data!.results == null) {
+      characters = await marvelRepository.getCharacters(offset);
+    } else {
+      setState(() {
+        loading = true;
+      });
+      offset = offset + characters.data!.count!;
+
+      var tempList = await marvelRepository.getCharacters(offset);
+
+      characters.data!.results!.addAll(tempList.data!.results!);
+      loading = false;
+    }
     setState(() {});
+  }
+
+  int retornaQuantidadeTotal() {
+    try {
+      return characters.data!.total!;
+    } catch (e) {
+      return 0;
+    }
+  }
+
+  int retornaQuantidadeAtual() {
+    try {
+      return offset + characters.data!.count!;
+    } catch (e) {
+      return 0;
+    }
   }
 
   @override
@@ -31,50 +62,69 @@ class _CharactersPageState extends State<CharactersPage> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(title: const Text('Heróis da Marvel')),
-      body: Container(
-        child: ListView.builder(
-            itemCount:
-                (characters.data == null || characters.data!.results == null)
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+                itemCount: (characters.data == null ||
+                        characters.data!.results == null)
                     ? 0
                     : characters.data!.results!.length,
-            itemBuilder: (_, int index) {
-              var character = characters.data!.results![index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Card(
-                    elevation: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.network(
-                            '${character.thumbnail!.path!}.${character.thumbnail!.extension!}',
-                            width: 100,
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    character.name!,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                  Text(character.description!),
-                                ],
+                itemBuilder: (_, int index) {
+                  var character = characters.data!.results![index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Card(
+                        elevation: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.network(
+                                '${character.thumbnail!.path!}.${character.thumbnail!.extension!}',
+                                width: 100,
                               ),
-                            ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        character.name!,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20),
+                                      ),
+                                      Text(character.description!),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    )),
-              );
-            }),
+                        )),
+                  );
+                }),
+          ),
+          !loading
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          carregarDados();
+                        },
+                        child: const Text('Carregar mais itens')),
+                    Text(
+                        '${retornaQuantidadeAtual()}/${retornaQuantidadeTotal()}'),
+                  ],
+                )
+              : const LinearProgressIndicator()
+        ],
       ),
     ));
   }
