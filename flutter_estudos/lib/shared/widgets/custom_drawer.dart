@@ -5,7 +5,8 @@ import 'package:flutter_estudos/pages/dados_cadastrais/dados_cadastrais.dart';
 import 'package:flutter_estudos/pages/login_page.dart';
 import 'package:flutter_estudos/pages/numeros_aleatorios/numeros_aleatorios_hive_page.dart';
 import 'package:flutter_estudos/pages/posts_page.dart';
-import 'package:flutter_estudos/repositories/marvel_repository.dart';
+import 'package:flutter_estudos/pages/tarefa_http_page.dart';
+import 'package:flutter_estudos/repositories/back4app/TarefasB4Repo.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -13,8 +14,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: [
           UserAccountsDrawerHeader(
               currentAccountPicture: InkWell(
@@ -206,6 +206,30 @@ class CustomDrawer extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (BuildContext bc) => const CharactersPage()));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                width: double.infinity,
+                child: const Row(
+                  children: [
+                    Icon(Icons.check_box),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Tarefas HTTP',
+                    ),
+                  ],
+                )),
+            onTap: () async {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext bc) => const TarefaPageHttp()));
             },
           ),
           Expanded(child: Container()),
