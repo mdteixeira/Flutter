@@ -57,7 +57,8 @@ class _TarefaPageHttpState extends State<TarefaPageHttp> {
                         child: const Text('Cancelar')),
                     TextButton(
                         onPressed: () async {
-                          await tarefaRepository.criar(TarefasBack4AppModel(descricaoController.text, false));
+                          await tarefaRepository.criar(
+                              Tarefa.criar(descricaoController.text, false));
                           obterTarefas();
                           Navigator.pop(context);
                           setState(() {});
@@ -102,7 +103,7 @@ class _TarefaPageHttpState extends State<TarefaPageHttp> {
                           return Dismissible(
                             onDismissed:
                                 (DismissDirection dismissDirection) async {
-                              // await tarefaRepository.remover(tarefa.id);
+                              await tarefaRepository.remover(tarefa.objectId);
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                   content: Text(
                                       "A tarefa ${tarefa.descricao} foi deletada.")));
@@ -114,6 +115,8 @@ class _TarefaPageHttpState extends State<TarefaPageHttp> {
                               trailing: Switch(
                                   value: tarefa.concluido,
                                   onChanged: (bool value) async {
+                                    tarefa.concluido = value;
+                                    await tarefaRepository.atualizar(tarefa);
                                     obterTarefas();
                                   }),
                             ),

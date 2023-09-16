@@ -17,7 +17,6 @@ class TarefasBack4AppModel {
     data['results'] = tarefas.map((v) => v.toJson()).toList();
     return data;
   }
-
 }
 
 class Tarefa {
@@ -29,6 +28,8 @@ class Tarefa {
 
   Tarefa(this.objectId, this.descricao, this.concluido, this.createdAt,
       this.updatedAt);
+
+  Tarefa.criar(this.descricao, this.concluido);
 
   Tarefa.fromJson(Map<String, dynamic> json) {
     objectId = json['objectId'];
@@ -45,7 +46,7 @@ class Tarefa {
     return data;
   }
 
-  Map<String, dynamic> toCreateJson() {
+  Map<String, dynamic> toJsonEndpoint() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['descricao'] = descricao;
     data['concluido'] = concluido;

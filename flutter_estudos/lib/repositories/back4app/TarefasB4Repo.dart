@@ -28,10 +28,26 @@ class TarefaBack4AppRepository {
 
   Future<void> criar(Tarefa tarefasBack4AppModel) async {
     try {
-      var response =
-          await _dio.post('/Tarefas', data: tarefasBack4AppModel.toCreateJson());
+      await _dio.post('/Tarefas', data: tarefasBack4AppModel.toJsonEndpoint());
     } catch (e) {
-      throw e;
+      rethrow;
+    }
+  }
+
+  Future<void> atualizar(Tarefa tarefasBack4AppModel) async {
+    try {
+      await _dio.put('/Tarefas/${tarefasBack4AppModel.objectId}',
+          data: tarefasBack4AppModel.toJsonEndpoint());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> remover(String objectID) async {
+    try {
+      await _dio.delete('/Tarefas/$objectID');
+    } catch (e) {
+      rethrow;
     }
   }
 }
