@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.blue,
         textTheme: GoogleFonts.interTextTheme(),
-      ),
+      ),  
       home: const LoginPage(),
     );
   }

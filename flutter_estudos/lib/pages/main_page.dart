@@ -1,4 +1,7 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_estudos/pages/brasil_fields.dart';
 import 'package:flutter_estudos/pages/cards_page.dart';
 import 'package:flutter_estudos/pages/list_view_h.dart';
 import 'package:flutter_estudos/pages/list_view_v.dart';
@@ -32,12 +35,13 @@ class _MainPageState extends State<MainPage> {
                         posicaoPagina = value;
                       });
                     },
-                    children: const [
+                    children: [
                       CardsPage(),
                       ConsultaCEP(),
                       ListViewVertical(),
                       ListViewHorizontal(),
-                      TarefaPageSQL()
+                      TarefaPageSQL(),
+                      BrasilFields()
                     ]),
               ),
               BottomNavigationBar(
@@ -57,6 +61,8 @@ class _MainPageState extends State<MainPage> {
                         label: 'Horizontal', icon: Icon(Icons.view_column)),
                     BottomNavigationBarItem(
                         label: 'Tarefas', icon: Icon(Icons.check)),
+                    BottomNavigationBarItem(
+                        label: 'Brasil_fields', icon: Icon(Icons.flag)),
                   ])
             ],
           )),
