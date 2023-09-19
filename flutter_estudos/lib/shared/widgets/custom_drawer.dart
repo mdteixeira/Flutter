@@ -7,6 +7,7 @@ import 'package:flutter_estudos/pages/numeros_aleatorios/numeros_aleatorios_hive
 import 'package:flutter_estudos/pages/posts_page.dart';
 import 'package:flutter_estudos/pages/tarefa_http_page.dart';
 import 'package:flutter_estudos/repositories/back4app/TarefasB4Repo.dart';
+import 'package:intl/intl.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -230,6 +231,33 @@ class CustomDrawer extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (BuildContext bc) => const TarefaPageHttp()));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                width: double.infinity,
+                child: const Row(
+                  children: [
+                    Icon(Icons.language),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Intl',
+                    ),
+                  ],
+                )),
+            onTap: () {
+              var f = NumberFormat('#,###.0#', 'en_US');
+              var fBR = NumberFormat('#,###.0#', 'pt_BR');
+              print(f.format(12345.345));
+              print(fBR.format(12345.345));
+
+              var dia = DateTime.now();
+              print(DateFormat('EEEEE', 'en_US').format(dia));
             },
           ),
           Expanded(child: Container()),

@@ -18,7 +18,7 @@ class _BrasilFieldsState extends State<BrasilFields> {
     return ListView(
       children: [
         Card(
-          margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
