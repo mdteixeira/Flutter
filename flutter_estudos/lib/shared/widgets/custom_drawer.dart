@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_estudos/pages/Characters/characters_page.dart';
 import 'package:flutter_estudos/pages/configuracoes/configuracoes_hive_page.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_estudos/pages/login_page.dart';
 import 'package:flutter_estudos/pages/numeros_aleatorios/numeros_aleatorios_hive_page.dart';
 import 'package:flutter_estudos/pages/posts_page.dart';
 import 'package:flutter_estudos/pages/tarefa_http_page.dart';
-import 'package:flutter_estudos/repositories/back4app/TarefasB4Repo.dart';
 import 'package:intl/intl.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -253,11 +253,37 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               var f = NumberFormat('#,###.0#', 'en_US');
               var fBR = NumberFormat('#,###.0#', 'pt_BR');
-              print(f.format(12345.345));
-              print(fBR.format(12345.345));
+              debugPrint(f.format(12345.345));
+              debugPrint(fBR.format(12345.345));
 
               var dia = DateTime.now();
-              print(DateFormat('EEEEE', 'en_US').format(dia));
+              debugPrint(DateFormat('EEEEE', 'en_US').format(dia));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                width: double.infinity,
+                child: const Row(
+                  children: [
+                    Icon(Icons.translate),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Mudar Idioma',
+                    ),
+                  ],
+                )),
+            onTap: () {
+              if (context.locale.toString() == 'pt_BR') {
+                context.setLocale(const Locale('en', 'US'));
+              } else {
+                context.setLocale(const Locale('pt', 'BR'));
+              }
+              Navigator.pop(context);
             },
           ),
           Expanded(child: Container()),

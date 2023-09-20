@@ -1,6 +1,5 @@
-import 'package:brasil_fields/brasil_fields.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_estudos/pages/brasil_fields.dart';
 import 'package:flutter_estudos/pages/cards_page.dart';
 import 'package:flutter_estudos/pages/list_view_h.dart';
@@ -19,11 +18,12 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   PageController controller = PageController(initialPage: 0);
   int posicaoPagina = 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(title: const Text("Main page")),
+          appBar: AppBar(title: const Text("APP_TITLE").tr()),
           drawer: const CustomDrawer(),
           body: Column(
             children: [
@@ -35,7 +35,7 @@ class _MainPageState extends State<MainPage> {
                         posicaoPagina = value;
                       });
                     },
-                    children: [
+                    children: const [
                       CardsPage(),
                       ConsultaCEP(),
                       ListViewVertical(),
