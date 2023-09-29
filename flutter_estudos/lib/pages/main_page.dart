@@ -25,6 +25,7 @@ class _MainPageState extends State<MainPage> {
       child: Scaffold(
           appBar: AppBar(title: const Text("APP_TITLE").tr()),
           drawer: const CustomDrawer(),
+          
           body: Column(
             children: [
               Expanded(
