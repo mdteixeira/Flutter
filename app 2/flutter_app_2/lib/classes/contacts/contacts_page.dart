@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app_2/classes/contacts/contacts_repository.dart';
+import 'package:flutter_app_2/classes/image/image_helper.dart';
 import 'package:flutter_app_2/pages/contact_page.dart';
 
 class ContactsPage extends StatefulWidget {
@@ -37,6 +40,8 @@ class _ContactsPageState extends State<ContactsPage> {
     });
   }
 
+  File? image;
+
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -49,6 +54,7 @@ class _ContactsPageState extends State<ContactsPage> {
             child: ListView.builder(
               itemBuilder: (BuildContext bc, int index) {
                 var contato = _contatos[index];
+                image = File(contato.contactPhoto);
                 return Column(
                   children: [
                     ListTile(
@@ -61,12 +67,11 @@ class _ContactsPageState extends State<ContactsPage> {
                         },
                         title: Text(contato.contactName ?? 'null'),
                         leading: CircleAvatar(
-                          child: contato.contactPhoto == 'none'
-                              ? Text(contato.contactName
-                                  .toString()
-                                  .substring(0, 1))
-                              : const Icon(Icons.person),
-                        )),
+                            foregroundImage:
+                                image != null ? FileImage(image!) : null,
+                            child: Text(contato.contactName
+                                .toString()
+                                .substring(0, 1)))),
                     const Divider()
                   ],
                 );

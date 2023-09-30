@@ -1,6 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app_2/classes/contacts/contacts_model.dart';
 import 'package:flutter_app_2/classes/contacts/contacts_repository.dart';
+import 'package:flutter_app_2/classes/image/image_helper.dart';
+import 'package:image_cropper/image_cropper.dart';
+
+final imageHelper = ImageHelper();
 
 class AddContactsPage extends StatefulWidget {
   const AddContactsPage({super.key});
@@ -18,6 +24,8 @@ class _AddContactsPageState extends State<AddContactsPage> {
   var numberController = TextEditingController();
 
   var loading = false;
+
+  File? image;
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +50,23 @@ class _AddContactsPageState extends State<AddContactsPage> {
                           Column(
                             children: [
                               ListTile(
-                                title: const Text('Câmera'),
-                                leading: const Icon(Icons.photo_camera),
-                                onTap: () {},
-                              ),
-                              ListTile(
-                                leading: const Icon(Icons.photo_library),
                                 title: const Text('Galeria'),
-                                onTap: () {},
-                              )
+                                leading: const Icon(Icons.photo_library),
+                                onTap: () async {
+                                  final file = await ImageHelper().pickImage();
+                                  if (file != null) {
+                                    final croppedFile = await imageHelper.crop(
+                                      file: file,
+                                      cropStyle: CropStyle.circle,
+                                    );
+                                    if (croppedFile != null) {
+                                      setState(() {
+                                        image = File(croppedFile.path);
+                                      });
+                                    }
+                                  }
+                                },
+                              ),
                             ],
                           ),
                         ],
@@ -58,17 +74,14 @@ class _AddContactsPageState extends State<AddContactsPage> {
                     },
                   );
                 },
-                child: CircleAvatar(
-                  radius: 60,
-                  child: contato.contactPhoto == 'none'
-                      ? Text(
-                          nomeController.text.substring(0, 1),
-                          style: const TextStyle(fontSize: 45),
-                        )
-                      : const Icon(
-                          Icons.person_add,
-                          size: 50,
-                        ),
+                child: Center(
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: CircleAvatar(
+                      radius: 60,
+                      foregroundImage: image != null ? FileImage(image!) : null,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -105,12 +118,14 @@ class _AddContactsPageState extends State<AddContactsPage> {
                           });
                           await repository.salvarContato(Contato(
                               contactName: nomeController.text,
-                              contactPhoto: 'none',
+                              contactPhoto: image?.path ?? 'none',
                               contactNumber: numberController.text));
                           setState(() {
                             loading = false;
                             Navigator.pop(context);
                           });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Contato criado.')));
                         },
                         child: const Text("Criar Contato"))
               ],
