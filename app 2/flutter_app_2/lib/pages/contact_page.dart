@@ -15,6 +15,11 @@ class _ContactPageState extends State<ContactPage> {
   var repository = ContactsRepository();
   var loading = false;
 
+  var editing = false;
+
+  var nomeController = TextEditingController();
+  var numberController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,12 +29,22 @@ class _ContactPageState extends State<ContactPage> {
           MenuAnchor(
             menuChildren: <Widget>[
               MenuItemButton(
+                child: const Text('Editar contato'),
+                onPressed: () {
+                  setState(() {
+                    editing = true;
+                    nomeController.text = widget.contato.contactName ?? '';
+                    numberController.text = widget.contato.contactNumber ?? '';
+                  });
+                },
+              ),
+              MenuItemButton(
                 child: const Text('Apagar contato'),
-                onPressed: () async {
+                onPressed: () {
                   setState(() {
                     loading = true;
                   });
-                  await repository.apagar(widget.contato.objectId);
+                  repository.apagar(widget.contato.objectId);
                   setState(() {
                     loading = true;
                   });
@@ -64,17 +79,55 @@ class _ContactPageState extends State<ContactPage> {
                   )
                 : const Icon(Icons.person),
           ),
-          Column(
-            children: [
-              const SizedBox(height: 15),
-              Text(
-                widget.contato.contactName ?? '',
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-              ),
-              Text('Telefone: ${widget.contato.contactNumber ?? ''}'),
-            ],
-          )
+          editing
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 15),
+                      const Text('Nome'),
+                      TextFormField(
+                        controller: nomeController,
+                      ),
+                      const SizedBox(height: 30),
+                      const Text('Telefone'),
+                      TextFormField(controller: numberController),
+                      const SizedBox(height: 30),
+                      Center(
+                        child: loading
+                            ? const CircularProgressIndicator()
+                            : ElevatedButton(
+                                onPressed: () async {
+                                  setState(() {
+                                    loading = true;
+                                  });
+                                  widget.contato.contactName =
+                                      nomeController.text;
+                                  widget.contato.contactNumber =
+                                      numberController.text;
+                                  await repository.editar(widget.contato);
+                                  setState(() {
+                                    loading = false;
+                                    editing = false;
+                                  });
+                                },
+                                child: const Text('Salvar alterações')),
+                      )
+                    ],
+                  ),
+                )
+              : Column(
+                  children: [
+                    const SizedBox(height: 15),
+                    Text(
+                      widget.contato.contactName ?? '',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 25),
+                    ),
+                    Text('Telefone: ${widget.contato.contactNumber ?? ''}'),
+                  ],
+                )
         ],
       ),
     );

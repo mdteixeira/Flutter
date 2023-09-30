@@ -64,4 +64,26 @@ class ContactsRepository {
       print('apagou com sucesso');
     }
   }
+
+  editar(Contato contato) async {
+    var dio = Dio();
+
+    dio.options.headers['X-Parse-Application-Id'] =
+        'j2oRFY9clTOPj1fMjmmtLtsFjlOicjcvZeVxjAyL';
+    dio.options.headers['X-Parse-REST-API-Key'] =
+        'xHTJ7QqQQK2F8gxsalw59CJOBAKP5FuJfGgUP3mM';
+    dio.options.headers['Content-Type'] = 'application/json';
+
+    var response = await dio.put(
+        'https://parseapi.back4app.com/classes/contact/${contato.objectId}',
+        data: {
+          'contactName': contato.contactName,
+          'contactNumber': contato.contactNumber,
+          'contactPhoto': contato.contactPhoto
+        });
+
+    if (response.statusCode == 200) {
+      print('editou com sucesso');
+    }
+  }
 }
